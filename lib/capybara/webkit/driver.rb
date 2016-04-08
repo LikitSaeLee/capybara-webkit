@@ -11,8 +11,8 @@ module Capybara::Webkit
   class Driver < Capybara::Driver::Base
     def initialize(app, options={})
       @app = app
+      options[:server] ||= Server.new(options)
       @options = options.dup
-      @options[:server] ||= Server.new(options)
       @browser = options[:browser] || Browser.new(Connection.new(options))
       apply_options
     end
